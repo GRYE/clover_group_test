@@ -1,5 +1,7 @@
 package firsttask.model
 
+import firsttask.fileutils.StringParser
+
 import scala.collection.immutable.TreeMap
 import scala.util.Try
 
@@ -11,6 +13,8 @@ object MetricEntity {
     val splitted = csvString.filter(_ != '"').split(separator)
     MetricEntity(splitted(0).toLong, splitted(1), splitted(2).toInt)
   }
+
+  implicit val parser: StringParser[MetricEntity] = apply(_)
 
 }
 

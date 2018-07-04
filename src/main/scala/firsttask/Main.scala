@@ -3,6 +3,7 @@ package firsttask
 import firsttask.fileutils.FileUtils
 import firsttask.model.MetricEntity
 import firsttask.processing.MetricsProcessor
+import firsttask.model.MetricEntity._
 
 object Main extends App {
 
@@ -11,9 +12,7 @@ object Main extends App {
     "fast_sensor" -> 100
   )
 
-  val metrics = FileUtils.read("metrics.csv")
-    .map(MetricEntity.apply(_))
-    .flatMap(_.toOption)
+  val metrics = FileUtils.readAs[MetricEntity]("metrics.csv")
 
   print(MetricsProcessor.process(metrics, timeouts).toList)
 
